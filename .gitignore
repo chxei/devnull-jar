@@ -133,7 +133,7 @@ gradle-app.setting
 
 ### Gradle Patch ###
 **/build/
-
+!build/libs
 # End of https://www.gitignore.io/api/java,gradle,intellij
 /.idea/discord.xml
 .idea/compiler.xml
