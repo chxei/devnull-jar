@@ -1,1 +1,1 @@
-worker: java -jar build/libs/DevNull-withDependencies.jar
+worker: java -jar build/libs/DevNull.jar

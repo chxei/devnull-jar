@@ -33,7 +33,7 @@ jar{
 
 }
 task fatJar(type: Jar) {
-    baseName ='DevNull-withDependencies'
+    baseName ='DevNull'
     from { configurations.compile.findAll { !it.name.endsWith('pom') }.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
 }
