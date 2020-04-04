@@ -1,8 +1,7 @@
+import Bootstrapper.Bootstrapper;
 import io.github.cdimascio.dotenv.Dotenv;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
-import net.dv8tion.jda.api.events.GenericEvent;
-import net.dv8tion.jda.api.events.ReadyEvent;
 
 
 //This is where things start
