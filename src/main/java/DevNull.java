@@ -8,7 +8,10 @@ import net.dv8tion.jda.api.events.ReadyEvent;
 //This is where things start
 public class DevNull {
     public static void main(String[] args) throws Exception {
-        Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
+        Dotenv dotenv = Dotenv.configure()
+                .ignoreIfMissing()
+                .ignoreIfMalformed()
+                .load();
         JDABuilder jda = new JDABuilder();
         System.out.println(dotenv.get("TOKEN"));
         System.out.println((String)dotenv.get("TOKEN"));
