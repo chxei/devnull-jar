@@ -1,19 +1,22 @@
 import Bootstrapper.Bootstrapper;
+import Bootstrapper.DB;
 import io.github.cdimascio.dotenv.Dotenv;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
+
+import java.sql.Connection;
 
 
 //This is where things start
 public class DevNull {
     public static void main(String[] args) throws Exception {
+        DB db = new DB();
+        Connection conn = db.connect();
         Dotenv dotenv = Dotenv.configure()
                 .ignoreIfMissing()
                 .ignoreIfMalformed()
                 .load();
         JDABuilder jda = new JDABuilder();
-        System.out.println(dotenv.get("TOKEN"));
-        System.out.println((String)dotenv.get("TOKEN"));
         jda.setToken(dotenv.get("TOKEN"));
         jda.setActivity(Activity.watching("Luke Smith"));
 
