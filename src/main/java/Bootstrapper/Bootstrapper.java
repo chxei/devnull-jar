@@ -1,5 +1,6 @@
 package Bootstrapper;
 
+import Quotes.QuotesBot;
 import corona.Corona;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
@@ -17,8 +18,8 @@ public class Bootstrapper<onGuildJoinEvent> extends ListenerAdapter {
     public void onMessageReceived(MessageReceivedEvent event) {
         Message msg = event.getMessage();
         String rawContent = msg.getContentRaw();
-        String prefix = rawContent.substring(0, 1);
-        if (!prefix.equals("j") || event.getAuthor().isBot()) {
+        String prefix = rawContent.substring(0, 2);
+        if (!prefix.equals("j ") || event.getAuthor().isBot()) {
             return;
         }
         String command = rawContent.substring(2, rawContent.length());
@@ -38,6 +39,9 @@ public class Bootstrapper<onGuildJoinEvent> extends ListenerAdapter {
                 break;
             case "what can you do?":
                 event.getChannel().sendMessage("I'm useless").queue();
+                break;
+            case "quote":
+                QuotesBot.getQuote(event);
                 break;
             default:
                 EventNotFound.commandNotFoundHandler(event);
