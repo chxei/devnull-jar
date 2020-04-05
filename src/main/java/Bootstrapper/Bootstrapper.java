@@ -18,8 +18,11 @@ public class Bootstrapper<onGuildJoinEvent> extends ListenerAdapter {
     public void onMessageReceived(MessageReceivedEvent event) {
         Message msg = event.getMessage();
         String rawContent = msg.getContentRaw();
+        if(rawContent.length()==0 || event.getAuthor().isBot()){
+            return;
+        }
         String prefix = rawContent.substring(0, 2);
-        if (!prefix.equals("j ") || event.getAuthor().isBot()) {
+        if (!prefix.equals("j ") ) {
             return;
         }
         String command = rawContent.substring(2, rawContent.length());

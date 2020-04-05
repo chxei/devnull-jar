@@ -22,3 +22,6 @@ public class Quote {
     }
 
 }
+//TODO get quote by author
+//TODO Don't send duplicate quotes every
+//TODO ability to add quote
