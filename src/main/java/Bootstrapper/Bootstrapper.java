@@ -1,15 +1,14 @@
 package Bootstrapper;
 
 import Quotes.QuotesBot;
-import corona.Corona;
+import corona.CoronaBot;
+import corona.CoronaDataType;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import javax.annotation.Nonnull;
-import java.util.HashSet;
-import java.util.Set;
 
 public class Bootstrapper<onGuildJoinEvent> extends ListenerAdapter {
 
@@ -38,7 +37,7 @@ public class Bootstrapper<onGuildJoinEvent> extends ListenerAdapter {
 
                 break;
             case "corona":
-                channel.sendMessage(new Corona().getData()).queue();
+                channel.sendMessage(new CoronaBot().getData(CoronaDataType.COUNTRYWIDE)).queue();
                 break;
             case "what can you do?":
                 event.getChannel().sendMessage("I'm useless").queue();

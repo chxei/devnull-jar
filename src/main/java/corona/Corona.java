@@ -1,55 +1,55 @@
 package corona;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Scanner;
+import java.util.Date;
 
 public class Corona {
-    URL url;
-    HttpURLConnection conn;
-    String inline = "";
 
-    long confirmed = 0;
-    long deaths = 0;
-    long recovered = 0;
-    public static String output = "";
+    CoronaDataType dataType;
+    String location;
+    String countryCode;
+    double latitude;
+    double longitude;
+    Long confirmed;
+    Long dead;
+    Long recovered;
+    Date updateDate;
 
-    public Corona() {
-
+    public Corona(){}
+    public Corona(CoronaDataType dataType, String location, String countryCode, double latitude, double longitude, Long confirmed, Long dead, Long recovered, Date updateDate) {
+        this.dataType = dataType;
+        this.location = location;
+        this.countryCode = countryCode;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.confirmed = confirmed;
+        this.dead = dead;
+        this.recovered = recovered;
+        this.updateDate = updateDate;
     }
-    public String getData(){
-        try {
-            this.url = new URL("https://wuhan-coronavirus-api.laeyoung.endpoint.ainize.ai/jhu-edu/brief");
-            this.conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-            conn.connect();
-            int responseCode = conn.getResponseCode();
-            if (responseCode != 200) {
-                throw new RuntimeException("HttpResponseCode: " + responseCode);
-            } else {
-                Scanner sc = new Scanner(url.openStream());
-                while (sc.hasNext()) {
+    public Corona(CoronaDataType dataType, Long confirmed, Long dead, Long recovered) {
+        this.dataType = dataType;
+        this.confirmed = confirmed;
+        this.dead = dead;
+        this.recovered = recovered;
+    }
 
-                    inline += sc.nextLine();
-                }
-                System.out.println("\nJSON data in string format");
-                System.out.println(inline);
-                JSONParser parse = new JSONParser();
-                JSONObject jobj = (JSONObject) parse.parse(inline);
-                confirmed = (long) jobj.get("confirmed");
-                deaths = (long) jobj.get("deaths");
-                recovered = (long) jobj.get("recovered");
-                output = "დაინფიცირდა: " + confirmed + ", მოკვდა: " + deaths + ", გამოჯანმრთელდა: " + recovered;
-                sc.close();
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+
+    @Override
+    public String toString() {
+        switch (this.dataType){
+            case WORLDWIDE: return "დაინფიცირდა: " +confirmed+", მოკვდა: "+ dead+", გამოჯანმრთელდა: "+ recovered;
+            default: return "Corona{" +
+                    "dataType=" + dataType +
+                    ", location='" + location + '\'' +
+                    ", countryCode='" + countryCode + '\'' +
+                    ", latitude=" + latitude +
+                    ", longitude=" + longitude +
+                    ", confirmed=" + confirmed +
+                    ", dead=" + dead +
+                    ", recovered=" + recovered +
+                    ", updateDate=" + updateDate +
+                    '}';
         }
-        return  output;
     }
-
 }
+
