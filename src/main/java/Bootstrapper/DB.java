@@ -8,7 +8,7 @@ import java.sql.SQLException;
  * @author postgresqltutorial.com
  */
 public class DB {
-    private String jdbc_url;
+    private final String jdbc_url;
 
     {
         Dotenv dotenv = Dotenv.configure()

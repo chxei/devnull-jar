@@ -11,8 +11,7 @@ import java.sql.Connection;
 //This is where things start
 public class DevNull {
     public static void main(String[] args) throws Exception {
-        DB db = new DB();
-        Connection conn = db.connect();
+
         Dotenv dotenv = Dotenv.configure()
                 .ignoreIfMissing()
                 .ignoreIfMalformed()
