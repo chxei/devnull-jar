@@ -139,3 +139,12 @@ gradle-app.setting
 .idea/compiler.xml
 src/test/
 .env
+
+#vscode crapp
+.project
+bin
+.settings
+.classpath
+.vscode
+gradlew
+gradle
