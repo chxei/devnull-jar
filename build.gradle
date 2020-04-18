@@ -8,7 +8,7 @@ group 'org.NullDefined'
 mainClassName = 'DevNull'
 sourceCompatibility = 1.8
 
-task stage(dependsOn: ['build', 'clean'])
+task stage(dependsOn: ['build', 'clean','fatJar'])
 build.mustRunAfter clean
 
 repositories {
