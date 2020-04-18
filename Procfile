@@ -1,1 +1,1 @@
-worker: gradle run
+worker: java -jar build/libs/DevNull.jar
