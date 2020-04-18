@@ -147,4 +147,5 @@ bin
 .classpath
 .vscode
 gradlew
+gradlew.bat
 gradle
