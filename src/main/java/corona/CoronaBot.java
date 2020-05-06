@@ -14,10 +14,10 @@ import static corona.CoronaDataType.COUNTRYWIDE;
 import static corona.CoronaDataType.WORLDWIDE;
 
 public final class CoronaBot {
-    static String link = "https://www.trackcorona.live/api/";
-    static URL url;
-    static HttpURLConnection httpConn;
-    static List<Corona> coronas;
+    String link = "https://www.trackcorona.live/api/";
+    URL url;
+    HttpURLConnection httpConn;
+    List<Corona> coronas;
 
     public CoronaBot() {
     }
