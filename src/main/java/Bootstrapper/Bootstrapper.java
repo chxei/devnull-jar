@@ -6,6 +6,7 @@ import corona.CoronaDataType;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberRemoveEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import javax.annotation.Nonnull;
@@ -63,6 +64,14 @@ public class Bootstrapper<onGuildJoinEvent> extends ListenerAdapter {
         String message = "Hey <@" + id + ">, welcome to **" + server + "** <:thomas1:647160141778518022> "
                 + welcomeChannel + " -ს და " + rulesChannel + " -ს გაეცანი და " + whoami
                 + " -ში გაგვეცანი <:boomer:645706743279517709>";
+        e.getGuild().getTextChannelById("617042233719259181").sendMessage(message).queue();
+    }
+
+
+    @Override
+    public void onGuildMemberRemove(@Nonnull GuildMemberRemoveEvent e) {
+        String id = e.getUser().getId();
+        String message = "<@" + id + ">-მ დაგვტოვა";
         e.getGuild().getTextChannelById("617042233719259181").sendMessage(message).queue();
     }
 }
