@@ -10,6 +10,7 @@ import net.dv8tion.jda.api.events.guild.member.GuildMemberRemoveEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import javax.annotation.Nonnull;
+import MiniBots.Remindme;
 
 public class Bootstrapper<onGuildJoinEvent> extends ListenerAdapter {
 
@@ -48,6 +49,9 @@ public class Bootstrapper<onGuildJoinEvent> extends ListenerAdapter {
                 } else {
                     QuotesBot.getQuote(event);
                 }
+                break;
+            case "remindme":
+                new Remindme(event);
                 break;
             default:
                 EventNotFound.commandNotFoundHandler(event);
