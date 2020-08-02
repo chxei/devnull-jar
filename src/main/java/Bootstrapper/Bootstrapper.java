@@ -43,9 +43,10 @@ public class Bootstrapper<onGuildJoinEvent> extends ListenerAdapter {
                 channel.sendMessage(new CoronaBot().getData(CoronaDataType.COUNTRYWIDE)).queue();
                 break;
             case "quote":
-                System.out.println(messageArray[2]);
                 if(messageArray[2].equals("add")){
                     QuotesBot.addQuote(event);
+                } else if(messageArray[2].equals("search")){
+                    QuotesBot.searchQuote(event);
                 } else {
                     QuotesBot.getQuote(event);
                 }

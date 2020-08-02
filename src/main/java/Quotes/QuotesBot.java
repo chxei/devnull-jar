@@ -51,4 +51,20 @@ public class QuotesBot {
             // e.printStackTrace();
         }
     }
+    public static void searchQuote(MessageReceivedEvent e){
+
+        String[] messageArray = e.getMessage().getContentRaw().split("\"");
+        String searchText = messageArray[1];
+        query = "SELECT quote, author from \"Quotes\" WHERE LOWER(quote) like LOWER(\'%"+searchText+"%\') or LOWER(author) like LOWER(\'%"+searchText+"%\') ORDER BY random() LIMIT 1;";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(query);;
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                Quote quote = new Quote(resultSet.getString(1),resultSet.getString(2));
+                e.getChannel().sendMessage(quote.toString()).queue();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 }
