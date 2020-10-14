@@ -15,7 +15,7 @@ public class DevNull {
                 .load();
         JDABuilder jda = new JDABuilder(AccountType.BOT);
         jda.setToken(dotenv.get("TOKEN"));
-        jda.setActivity(Activity.watching("Luke Smith"));
+        jda.setActivity(Activity.listening("Cabaret Nocturne"));
 
         jda.addEventListeners(new Bootstrapper()).build();
     }
