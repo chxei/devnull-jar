@@ -36,7 +36,6 @@ public final class CoronaBot {
             if (responseCode != 200) {
                 throw new RuntimeException("HttpResponseCode: " + responseCode);
             } else {
-                //return structure {code: 200; data {} }
                 JSONArray jobA = (JSONArray) ((JSONObject) (new JSONParser().parse(new InputStreamReader((InputStream) httpConn.getContent())))).get("data");
                 long deadSum = 0;
                 long confirmedSum = 0;
@@ -49,13 +48,6 @@ public final class CoronaBot {
                     deadSum += dead;
                     confirmedSum += confirmed;
                     recoveredSum += recovered;
-                    //String countryCode = (String) ((JSONObject)cor).get("country_code");
-                    //String location =(String) ((JSONObject)cor).get("location");
-                    //double latitude = (double) ((JSONObject)cor).get("latitude");
-                    //double longitude = (double) ((JSONObject)cor).get("longitude");
-                    //Date updateDate =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSSSSXXX").parse((String)((JSONObject)cor).get("updated"));
-                    //Corona corona = new Corona(dataType,location,countryCode,latitude,longitude,confirmed,dead,recovered,updateDate);
-                    //coronas.add(corona);
                 }
                 c1 = new Corona(WORLDWIDE, confirmedSum, deadSum, recoveredSum);
             }
