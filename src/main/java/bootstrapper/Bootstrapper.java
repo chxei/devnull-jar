@@ -1,6 +1,5 @@
-package Bootstrapper;
+package bootstrapper;
 
-import Quotes.QuotesBot;
 import corona.CoronaBot;
 import corona.CoronaDataType;
 import net.dv8tion.jda.api.entities.Message;
@@ -9,10 +8,12 @@ import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberRemoveEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import quotes.QuotesBot;
+
 import javax.annotation.Nonnull;
 import MiniBots.Remindme;
 
-public class Bootstrapper<onGuildJoinEvent> extends ListenerAdapter {
+public class Bootstrapper extends ListenerAdapter {
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
@@ -34,9 +35,7 @@ public class Bootstrapper<onGuildJoinEvent> extends ListenerAdapter {
         switch (command) {
             case "ping":
                 channel.sendMessage("Pong!") /* => RestAction<Message> */
-                        .queue(response /* => Message */ -> {
-                            response.editMessageFormat("Pong: %d ms", System.currentTimeMillis() - time).queue();
-                        });
+                        .queue(response /* => Message */ -> response.editMessageFormat("Pong: %d ms", System.currentTimeMillis() - time).queue() );
 
                 break;
             case "corona":

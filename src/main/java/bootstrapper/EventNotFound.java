@@ -1,11 +1,13 @@
-package Bootstrapper;
+package bootstrapper;
 
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import java.io.File;
 import java.util.*;
 
+import org.slf4j.LoggerFactory;
+
 public class EventNotFound {
-    public static String[][] huh;
+    protected static String[][] huh;
 
     static{
         huh = new String[][]{
@@ -27,6 +29,7 @@ public class EventNotFound {
         };
     }
 
+    private EventNotFound(){}
     public static void commandNotFoundHandler(MessageReceivedEvent e){
         int index = new Random().nextInt(huh.length-1);
         switch(huh[index][1]){
@@ -37,6 +40,9 @@ public class EventNotFound {
             case "gif":
                     e.getChannel().sendFile(new File("src/main/resources/gifs/"+huh[index][0])).queue();
                 break;
+            default:
+            org.slf4j.Logger logger = LoggerFactory.getLogger(DB.class);
+            logger.info("somethings wrong");
         }
     }
 }

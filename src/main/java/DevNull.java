@@ -1,11 +1,11 @@
-import Bootstrapper.Bootstrapper;
+import bootstrapper.Bootstrapper;
 import io.github.cdimascio.dotenv.Dotenv;
-import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.requests.GatewayIntent;
 
+import java.util.EnumSet;
 
-//This is where things start
 public class DevNull {
     public static void main(String[] args) throws Exception {
 
@@ -13,10 +13,17 @@ public class DevNull {
                 .ignoreIfMissing()
                 .ignoreIfMalformed()
                 .load();
-        JDABuilder jda = new JDABuilder(AccountType.BOT);
-        jda.setToken(dotenv.get("TOKEN"));
-        jda.setActivity(Activity.listening("Cabaret Nocturne"));
+        EnumSet<GatewayIntent> intents = EnumSet.of(
+                // We need messages in guilds to accept commands from users
+                GatewayIntent.GUILD_MESSAGES,
+                // We need voice states to connect to the voice channel
+                GatewayIntent.GUILD_VOICE_STATES
+        );
 
-        jda.addEventListeners(new Bootstrapper()).build();
+        JDABuilder.createLight(dotenv.get("TOKEN"), intents)
+                    .setRawEventsEnabled(true)
+                    .setActivity(Activity.listening("Cabaret Nocturne"))
+                    .addEventListeners(new Bootstrapper())
+                    .build();
     }
 }

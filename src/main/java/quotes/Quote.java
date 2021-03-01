@@ -1,4 +1,4 @@
-package Quotes;
+package quotes;
 
 import java.util.Date;
 
