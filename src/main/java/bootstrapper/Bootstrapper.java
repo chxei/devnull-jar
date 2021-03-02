@@ -10,7 +10,6 @@ import net.dv8tion.jda.api.events.guild.member.GuildMemberRemoveEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import quotes.QuotesBot;
-
 import javax.annotation.Nonnull;
 
 public class Bootstrapper extends ListenerAdapter {
@@ -34,8 +33,7 @@ public class Bootstrapper extends ListenerAdapter {
 
         switch (command) {
             case "ping":
-                channel.sendMessage("Pong!") /* => RestAction<Message> */
-                        .queue(response /* => Message */ -> response.editMessageFormat("Pong: %d ms", System.currentTimeMillis() - time).queue() );
+                channel.sendMessage("Pong!").queue(response -> response.editMessageFormat("Pong: %d ms", System.currentTimeMillis() - time).queue() );
 
                 break;
             case "corona":
@@ -62,13 +60,10 @@ public class Bootstrapper extends ListenerAdapter {
     public void onGuildMemberJoin(@Nonnull GuildMemberJoinEvent e) {
         String id = e.getUser().getId();
         String server = e.getGuild().getName();
-        String rulesChannel = "<#617264349995859968>";
-        String welcomeChannel = "<#619881226794303499>";
-        String whoami = "<#619530585047695400>";
-        String message = "Hey <@" + id + ">, welcome to **" + server + "** <:thomas1:647160141778518022> "
-                + welcomeChannel + " -ს და " + rulesChannel + " -ს გაეცანი და " + whoami
-                + " -ში გაგვეცანი <:boomer:645706743279517709>";
-        e.getGuild().getTextChannelById("617042233719259181").sendMessage(message).queue();
+        String message = "Hey <@" + id + ">, welcome to **" + server + "** "+Configurations.NICE_EMOJI_EMBED+" <#"
+                + Configurations.WELCOME_CHANNEL_CODE + "> -ს და <#" + Configurations.RULES_CHANNEL_CODE + "> -ს გაეცანი და <#" +Configurations.WHOAMI_CHANNEL_CODE
+                + "> -ში გაგვეცანი "+Configurations.BOOOMER_EMOJI_EMBED;
+        e.getGuild().getTextChannelById(Configurations.MAIN_CHANNEL_CODE).sendMessage(message).queue();
     }
 
 
@@ -76,6 +71,6 @@ public class Bootstrapper extends ListenerAdapter {
     public void onGuildMemberRemove(@Nonnull GuildMemberRemoveEvent e) {
         String id = e.getUser().getId();
         String message = "<@" + id + ">-მ დაგვტოვა";
-        e.getGuild().getTextChannelById("617042233719259181").sendMessage(message).queue();
+        e.getGuild().getTextChannelById(Configurations.MAIN_CHANNEL_CODE).sendMessage(message).queue();
     }
 }
