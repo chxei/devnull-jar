@@ -1,6 +1,9 @@
-package MiniBots;
+package minibots;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -33,7 +36,7 @@ public class Remindme {
 		String time = message.substring(11, message.length());
 		long secs = parser(time);
 		timer.schedule(timerTask, secs*1000);
-		e.getChannel().sendMessage("Timer at "+LocalDateTime.now().plus(secs, ChronoUnit.SECONDS).toString().substring(0,19)).queue();
+		e.getChannel().sendMessage("Timer at "+DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now(ZoneId.of("Asia/Tbilisi")).plus(secs, ChronoUnit.SECONDS))).queue();
 	}
 
 	public long parser(String date){
@@ -45,6 +48,7 @@ public class Remindme {
 
 		if (date.contains("in")){
 			secs = Integer.parseInt(date.replaceAll("[^\\d ]", "").trim());
+
 			if (date.contains("hour")){
 				secs = secs*60*60;
 			} else if (date.contains("min")){
@@ -77,7 +81,7 @@ public class Remindme {
 				localTime= LocalTime.parse(date);
 			}
 			if (localTime.isBefore(now)){
-				return -1;
+				secs = ChronoUnit.SECONDS.between(now, localTime.plus(24, ChronoUnit.HOURS));
 			} else {
 				secs = ChronoUnit.SECONDS.between(now, localTime);
 			}

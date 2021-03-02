@@ -5,9 +5,11 @@ import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 
 import java.util.EnumSet;
+import java.util.TimeZone;
 
 public class DevNull {
     public static void main(String[] args) throws Exception {
+        TimeZone.setDefault(TimeZone.getTimeZone("Tbilisi"));
 
         Dotenv dotenv = Dotenv.configure()
                 .ignoreIfMissing()
