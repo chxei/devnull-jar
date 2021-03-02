@@ -39,7 +39,7 @@ public class Bootstrapper extends ListenerAdapter {
 
                 break;
             case "corona":
-                channel.sendMessage(new CoronaBot().getData(CoronaDataType.COUNTRYWIDE)).queue();
+                channel.sendMessage(CoronaBot.getData(CoronaDataType.COUNTRYWIDE)).queue();
                 break;
             case "quote":
                 if(messageArray[2].equals("add")){

@@ -4,9 +4,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.slf4j.LoggerFactory;
-
 import net.dv8tion.jda.api.exceptions.HttpException;
-
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -17,27 +15,29 @@ import static corona.CoronaDataType.COUNTRYWIDE;
 import static corona.CoronaDataType.WORLDWIDE;
 
 public final class CoronaBot {
-    String link = "https://www.trackcorona.live/api/";
-    URL url;
-    HttpURLConnection httpConn;
-    List<Corona> coronas;
+    static final String LINK = "https://www.trackcorona.live/api/";
 
-    public CoronaBot() {
-    }
 
-    public String getData(CoronaDataType dataType) {
+
+    private CoronaBot() {}
+
+    public static String getData(CoronaDataType dataType) {
         Corona c1 = new Corona();
+        URL url;
+        HttpURLConnection httpConn;
         try {
             if (dataType.equals(COUNTRYWIDE)) {
-                link += "countries";
+                url = new URL(LINK+"countries");
+            } else {
+                url = new URL(LINK);
             }
-            url = new URL(link);
+
             httpConn = (HttpURLConnection) url.openConnection();
             httpConn.setRequestMethod("GET");
             httpConn.connect();
             int responseCode = httpConn.getResponseCode();
             if (responseCode != 200) {
-                throw new RuntimeException("HttpResponseCode: " + responseCode);
+                throw new HttpException("responseCode: "+responseCode);
             } else {
                 JSONArray jobA = (JSONArray) ((JSONObject) (new JSONParser().parse(new InputStreamReader((InputStream) httpConn.getContent())))).get("data");
                 long deadSum = 0;
