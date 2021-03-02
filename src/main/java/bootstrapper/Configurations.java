@@ -7,7 +7,7 @@ public final class Configurations {
     public static final String WELCOME_CHANNEL_CODE = "619881226794303499";
 
     public static final String NICE_EMOJI_EMBED = "<:thomas1:647160141778518022>";
-    public static final String BOOOMER_EMOJI_EMBED = "<:boomer:645706743279517709>";
+    public static final String BOOMER_EMOJI_EMBED = "<:boomer:645706743279517709>";
 
     private Configurations(){}
 }

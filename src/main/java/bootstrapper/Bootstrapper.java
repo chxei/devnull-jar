@@ -62,7 +62,7 @@ public class Bootstrapper extends ListenerAdapter {
         String server = e.getGuild().getName();
         String message = "Hey <@" + id + ">, welcome to **" + server + "** "+Configurations.NICE_EMOJI_EMBED+" <#"
                 + Configurations.WELCOME_CHANNEL_CODE + "> -ს და <#" + Configurations.RULES_CHANNEL_CODE + "> -ს გაეცანი და <#" +Configurations.WHOAMI_CHANNEL_CODE
-                + "> -ში გაგვეცანი "+Configurations.BOOOMER_EMOJI_EMBED;
+                + "> -ში გაგვეცანი "+Configurations.BOOMER_EMOJI_EMBED;
         e.getGuild().getTextChannelById(Configurations.MAIN_CHANNEL_CODE).sendMessage(message).queue();
     }
 
