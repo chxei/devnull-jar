@@ -16,10 +16,10 @@ public class DevNull {
                 .ignoreIfMalformed()
                 .load();
         EnumSet<GatewayIntent> intents = EnumSet.of(
-                // We need messages in guilds to accept commands from users
                 GatewayIntent.GUILD_MESSAGES,
-                // We need voice states to connect to the voice channel
-                GatewayIntent.GUILD_VOICE_STATES
+                GatewayIntent.GUILD_MEMBERS,
+                GatewayIntent.GUILD_PRESENCES,
+                GatewayIntent.GUILD_BANS
         );
 
         JDABuilder.createLight(dotenv.get("TOKEN"), intents)
