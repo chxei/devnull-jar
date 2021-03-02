@@ -3,6 +3,9 @@ package corona;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.slf4j.LoggerFactory;
+
+import net.dv8tion.jda.api.exceptions.HttpException;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -52,9 +55,8 @@ public final class CoronaBot {
                 c1 = new Corona(WORLDWIDE, confirmedSum, deadSum, recoveredSum);
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            LoggerFactory.getLogger(CoronaBot.class).info(e.getMessage());
         }
-        System.out.println(c1);
         return c1.toString();
     }
 }

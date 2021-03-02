@@ -4,11 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import org.slf4j.LoggerFactory;
-/**
- * @author postgresqltutorial.com
- */
+
 public class DB {
-    org.slf4j.Logger logger = LoggerFactory.getLogger(DB.class);
     private final String jdbcUrl;
 
     public DB(){
@@ -30,7 +27,7 @@ public class DB {
         try {
             conn = DriverManager.getConnection(jdbcUrl);
         } catch (SQLException e) {
-            logger.info(e.getMessage());
+            LoggerFactory.getLogger(DB.class).info(e.getMessage());
         }
 
         return conn;

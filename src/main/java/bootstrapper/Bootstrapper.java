@@ -2,6 +2,7 @@ package bootstrapper;
 
 import corona.CoronaBot;
 import corona.CoronaDataType;
+import minibots.Remindme;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
@@ -11,7 +12,6 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import quotes.QuotesBot;
 
 import javax.annotation.Nonnull;
-import MiniBots.Remindme;
 
 public class Bootstrapper extends ListenerAdapter {
 
