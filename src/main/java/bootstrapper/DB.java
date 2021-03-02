@@ -1,35 +1,20 @@
 package bootstrapper;
+import com.zaxxer.hikari.HikariDataSource;
 import io.github.cdimascio.dotenv.Dotenv;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import org.slf4j.LoggerFactory;
+import javax.sql.DataSource;
 
 public class DB {
-    private final String jdbcUrl;
+    private static final String JDBC_URL = Dotenv.configure()
+                                                .ignoreIfMissing()
+                                                .ignoreIfMalformed()
+                                                .load()
+                                                .get("DB_JDBC_URL");
+    public static final DataSource datasource = initiate();
+    private DB(){}
 
-    public DB(){
-        Dotenv dotenv = Dotenv.configure()
-                .ignoreIfMissing()
-                .ignoreIfMalformed()
-                .load();
-        jdbcUrl = dotenv.get("DB_JDBC_URL");
-    }
-
-    /**
-     * Connect to the PostgreSQL database
-     *
-     * @return a Connection object
-     */
-    public Connection connect() {
-        Connection conn = null;
-
-        try {
-            conn = DriverManager.getConnection(jdbcUrl);
-        } catch (SQLException e) {
-            LoggerFactory.getLogger(DB.class).info(e.getMessage());
-        }
-
-        return conn;
+    public static DataSource initiate(){
+        HikariDataSource dataSource = new HikariDataSource();
+        dataSource.setJdbcUrl(JDBC_URL);
+        return  dataSource;
     }
 }

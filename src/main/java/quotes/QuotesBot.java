@@ -11,22 +11,20 @@ import bootstrapper.DB;
 
 public class QuotesBot {
     static Quote[] quotes;
-    static DB db = new DB();
-    static Connection conn = db.connect();
     static String query;
 
     private QuotesBot(){}
     public static void getQuote(MessageReceivedEvent e) {
         query = "SELECT quote, author from \"Quotes\" ORDER BY random() LIMIT 1;";
-        try(PreparedStatement preparedStatement = conn.prepareStatement(query);) {
+        try(Connection conn = DB.datasource.getConnection();PreparedStatement preparedStatement = conn.prepareStatement(query)) {
 
             ResultSet resultSet = preparedStatement.executeQuery();
             if(resultSet.next()){
                 Quote quote = new Quote(resultSet.getString(1),resultSet.getString(2));
                 e.getChannel().sendMessage(quote.toString()).queue();
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
         }
     }
 
@@ -37,11 +35,11 @@ public class QuotesBot {
         String[] messageArray = event.getMessage().getContentRaw().split("\"");
 
         if(messageArray.length<=1){
-            messageArray = event.getMessage().getContentRaw().split("\'");
+            messageArray = event.getMessage().getContentRaw().split("'");
         }
         String quote = messageArray[1];
         String author = messageArray[3];
-        try(PreparedStatement preparedStatement = conn.prepareStatement(query);) {
+        try(Connection conn = DB.datasource.getConnection();PreparedStatement preparedStatement = conn.prepareStatement(query)) {
 
             preparedStatement.setString(1,quote);
             preparedStatement.setString(2,author);
@@ -55,8 +53,8 @@ public class QuotesBot {
 
         String[] messageArray = e.getMessage().getContentRaw().split("\"");
         String searchText = messageArray[1];
-        query = "SELECT quote, author from \"Quotes\" WHERE LOWER(quote) like LOWER(\'%"+searchText+"%\') or LOWER(author) like LOWER(\'%"+searchText+"%\') ORDER BY random() LIMIT 1;";
-        try(PreparedStatement preparedStatement = conn.prepareStatement(query);) {
+        query = "SELECT quote, author from \"Quotes\" WHERE LOWER(quote) like LOWER('%" +searchText+ "%') or LOWER(author) like LOWER('%" +searchText+ "%') ORDER BY random() LIMIT 1;";
+        try(Connection conn = DB.datasource.getConnection();PreparedStatement preparedStatement = conn.prepareStatement(query)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             if(resultSet.next()){
                 Quote quote = new Quote(resultSet.getString(1),resultSet.getString(2));

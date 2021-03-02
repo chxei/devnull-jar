@@ -42,12 +42,12 @@ public class Bootstrapper extends ListenerAdapter {
                 channel.sendMessage(CoronaBot.getData(CoronaDataType.COUNTRYWIDE)).queue();
                 break;
             case "quote":
-                if(messageArray[2].equals("add")){
+                if(messageArray.length==2){
+                    QuotesBot.getQuote(event);
+                } else if(messageArray[2].equals("add")){
                     QuotesBot.addQuote(event);
                 } else if(messageArray[2].equals("search")){
                     QuotesBot.searchQuote(event);
-                } else {
-                    QuotesBot.getQuote(event);
                 }
                 break;
             case "remindme":
