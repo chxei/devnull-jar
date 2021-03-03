@@ -1,6 +1,8 @@
 package bootstrapper;
+
 import com.zaxxer.hikari.HikariDataSource;
 import io.github.cdimascio.dotenv.Dotenv;
+
 import javax.sql.DataSource;
 
 public class DB {

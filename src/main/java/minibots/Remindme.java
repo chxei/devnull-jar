@@ -1,5 +1,7 @@
 package minibots;
 
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
@@ -7,8 +9,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class Remindme {
 	TimerTask timerTask;
@@ -33,7 +33,7 @@ public class Remindme {
 	public Remindme(MessageReceivedEvent e){
 		setTask(e);
 		String message = e.getMessage().getContentRaw();
-		String time = message.substring(11, message.length());
+		String time = message.substring(11);
 		long secs = parser(time);
 		timer.schedule(timerTask, secs*1000);
 		e.getChannel().sendMessage("Timer at "+DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now(ZoneId.of("Asia/Tbilisi")).plus(secs, ChronoUnit.SECONDS))).queue();
@@ -66,11 +66,11 @@ public class Remindme {
 			} else if (date.contains("millennium")){
 				secs = secs*1000*365*31*7*24*60*60;
 			}
-			//yes I know about existense of switch statement
+			//yes I know about existence of switch statement
 		} else if (date.contains("at")){
 			LocalTime localTime;
 			LocalTime now = LocalTime.now();
-			date = date.substring(3, date.length());
+			date = date.substring(3);
 			if (date.contains("pm")){
 				date = date.substring(0, date.length()-2);
 				localTime= LocalTime.parse(date).plus(12, ChronoUnit.HOURS);

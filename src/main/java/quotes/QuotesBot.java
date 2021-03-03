@@ -1,13 +1,12 @@
 package quotes;
 
+import bootstrapper.DB;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import bootstrapper.DB;
 
 public class QuotesBot {
     static Quote[] quotes;
@@ -60,8 +59,8 @@ public class QuotesBot {
                 Quote quote = new Quote(resultSet.getString(1),resultSet.getString(2));
                 e.getChannel().sendMessage(quote.toString()).queue();
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
         }
     }
 }
