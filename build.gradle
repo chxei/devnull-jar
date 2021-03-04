@@ -1,9 +1,10 @@
 plugins {
     id'java'
     id'application'
-    id "com.github.johnrengelman.shadow" version "5.2.0"
+    id "com.github.johnrengelman.shadow" version "6.1.0"
 }
 group 'org.NullDefined'
+apply plugin: 'idea'
 //version '0.0.02042020'
 mainClassName = 'DevNull'
 sourceCompatibility = 1.8
@@ -17,9 +18,10 @@ repositories {
 
 dependencies {
     implementation 'net.dv8tion:JDA:4.2.0_231'
-    implementation group: 'ch.qos.logback', name: 'logback-core', version: '1.2.3'
-    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.30'
     implementation 'org.projectlombok:lombok:1.18.16'
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.30'
+    implementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.26'
+    implementation group: 'ch.qos.logback', name: 'logback-core', version: '1.2.3'
     implementation group: 'io.github.cdimascio', name: 'java-dotenv', version: '5.2.2'
     implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
     implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.19'

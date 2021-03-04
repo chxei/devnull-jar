@@ -41,8 +41,7 @@ public class EventNotFound {
                     e.getChannel().sendFile(new File("src/main/resources/gifs/"+huh[index][0])).queue();
                 break;
             default:
-            org.slf4j.Logger logger = LoggerFactory.getLogger(DB.class);
-            logger.info("somethings wrong");
+                LoggerFactory.getLogger(EventNotFound.class).info("wrong type of random answer");
         }
     }
 }

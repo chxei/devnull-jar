@@ -2,13 +2,14 @@ package quotes;
 
 import bootstrapper.DB;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-
+import org.slf4j.LoggerFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class QuotesBot {
+
     static Quote[] quotes;
     static String query;
 
@@ -23,7 +24,7 @@ public class QuotesBot {
                 e.getChannel().sendMessage(quote.toString()).queue();
             }
         } catch (SQLException throwable) {
-            throwable.printStackTrace();
+            LoggerFactory.getLogger(QuotesBot.class).info(throwable.getMessage());
         }
     }
 
@@ -44,8 +45,8 @@ public class QuotesBot {
             preparedStatement.setString(2,author);
             preparedStatement.setString(3,uploader);
             preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            event.getChannel().sendMessage(e.getMessage()).queue();
+        } catch (SQLException throwable) {
+            LoggerFactory.getLogger(QuotesBot.class).info(throwable.getMessage());
         }
     }
     public static void searchQuote(MessageReceivedEvent e){
@@ -60,7 +61,7 @@ public class QuotesBot {
                 e.getChannel().sendMessage(quote.toString()).queue();
             }
         } catch (SQLException throwable) {
-            throwable.printStackTrace();
+            LoggerFactory.getLogger(QuotesBot.class).info(throwable.getMessage());
         }
     }
 }

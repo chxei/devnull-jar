@@ -17,8 +17,6 @@ import static corona.CoronaDataType.WORLDWIDE;
 public final class CoronaBot {
     static final String LINK = "https://www.trackcorona.live/api/";
 
-
-
     private CoronaBot() {}
 
     public static String getData(CoronaDataType dataType) {
