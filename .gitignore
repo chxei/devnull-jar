@@ -144,3 +144,6 @@ bin
 .settings
 .classpath
 .vscode
+/.idea/checkstyle-idea.xml
+/.idea/jarRepositories.xml
+/.idea/vcs.xml
