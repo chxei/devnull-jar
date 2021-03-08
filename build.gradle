@@ -4,12 +4,9 @@ plugins {
     id "com.github.johnrengelman.shadow" version "6.1.0"
 }
 group 'org.NullDefined'
-apply plugin: 'idea'
-//version '0.0.02042020'
 mainClassName = 'DevNull'
 sourceCompatibility = 1.8
-
-task stage(dependsOn: ['build', 'clean','fatJar'])
+compileJava.options.encoding = 'UTF-8'
 
 repositories {
     mavenCentral()
@@ -29,23 +26,3 @@ dependencies {
 
     testImplementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
 }
-
-jar{
-    archiveFileName = 'DevNull'
-    manifest{
-        attributes 'Main-Class': 'DevNull'
-    }
-
-}
-task fatJar(type: Jar) {
-    manifest {
-        attributes 'Main-Class': 'DevNull'
-    }
-    archiveFileName ='DevNull'
-    from { configurations.compile.findAll { !it.name.endsWith('pom') }.collect { it.isDirectory() ? it : zipTree(it) } }
-    with jar
-}
-
-compileJava.options.encoding = 'UTF-8'
-
-assemble.dependsOn fatJar

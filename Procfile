@@ -1,1 +1,1 @@
-worker: ./gradlew run
+worker: java -jar build/libs/devnull-jar-all.jar
